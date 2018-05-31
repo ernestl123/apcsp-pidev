@@ -2,36 +2,50 @@
 #include <string.h>
 
 struct Student {
-	char firstname[25];
-	char lastname [25]; 
-	int age; 
-	int stdntid;
+	char first[50];
+	char last[50];
+	int age;
+	int stid;
 };
 
-
-
-int main (int argc, char* argv[])
+void printStudent(struct Student* student)
 {
-	struct Student mystudent1;
-	printf("Type your first name, last name, age, and student id with spaces in between them\n");
-	int arg = 1;
-	strcpy(mystudent1.firstname, argv[1]);
-	arg = 2;
-	strcpy(mystudent1.lastname, argv[2]);
-	arg = 3;
-	strcpy(mystudent1.age, argv[3]);
-	arg = 4;
-	strcpy(mystudent1.age, argv[4]);
-	arg =5;
+	printf("The name is %s %s.\n", student -> first, student -> last);
+	printf("The age is %d\n", student -> age);
+	printf("The student ID is %d\n", student -> stid);
 
-if (arg==5); 
-{
-void printstudent (struct Student* student)
-{
-	printf("The first name is %s\n", student->firstname);
-	printf("The last name is %s\n", student->lastname);
-	printf("The age is %d\n", student->age);
-	printf("The student id is %d\n", student->stdntid);
 }
-}
+
+int main()
+{
+
+	char input[50];
+	int answer;
+	printf("How many students?\n");
+	fgets(input, 256, stdin);
+	sscanf(input, "%d", &answer);
+	struct Student studentA[answer];
+	for (int i = 0; i<answer; i++)
+	{
+	printf("What is your first name?\n");
+	fgets(input, 256,stdin);
+	sscanf(input, "%s", &studentA[i].first);
+
+	printf("What is your last name?\n");
+	fgets(input, 256, stdin);
+	sscanf(input, "%s", &studentA[i].last);
+
+	printf("What is your age?\n");
+	fgets(input, 256, stdin);
+	sscanf(input, "%d", &studentA[i].age);
+
+	printf("What is your ID\n");
+	fgets(input, 256, stdin);
+	sscanf(input, "%d", &studentA[i].stid);
+	}
+
+	for (int i = 0; i<answer; i++)
+	{
+	printStudent(&studentA[i]);
+	}
 }
