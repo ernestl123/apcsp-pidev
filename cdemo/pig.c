@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <ctype.h>
-
+#include <stdlib.h>
 void init(char english[], char piglatin[]);
 void reader(char english[]);
 int wordcounter(char english[]);
@@ -84,17 +83,19 @@ void translate(int words, char english[], char piglatin[])
     // m1 starts word, m2 ends
 
     // translate
+
+
     for (n = 1; n <= words; ++n)
     {
         count = m1 ;
         while (english[count] != ' ')
             m2 = count++;
-
         // transp. first letter & add a
         for (count = m1 ; count < m2; ++count)
             piglatin[count + (n - 1)] = english[count + 1];
             piglatin[m2 + (n - 1)] = english[m1];
             piglatin[m2 + n] = 'a';
+	    piglatin[m2 + (n+1)] = 'y';
 
             m1 = m2 + 2;
     }
@@ -110,4 +111,4 @@ void output(char piglatin[])
         putchar(piglatin[count]);
     printf("\n");
     return;
-} 
+}
