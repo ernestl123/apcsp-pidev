@@ -4,33 +4,20 @@
 #include <ctype.h>
 
 void init(char english[], char piglatin[]);
-void reader(char english[]);
 int wordcounter(char english[]);
 void translate(int words, char english[], char piglatin[]);
-void output(char piglatin[]);
 
-int main( )
+
+int main()
 {
     char english[80], piglatin[80];
     int words;
-    printf("Type English Text and this will translate it into Pig Latin\n\n");
-    printf("Type 'END' when finished\n\n");
+	int arg1;
+	init(english, piglatin);
+	english[80] = arg1;
+	words = wordcounter(english);
+	translate(words, english, piglatin);
 
-    do
-    {
-        init(english, piglatin);
-        reader(english);
-
-        if (toupper(english[0]) == 'E' && toupper(english[1]) == 'N' && toupper(english[2]) == 'D')
-            break;
-
-        words = wordcounter(english);
-
-        translate(words, english, piglatin);
-        output(piglatin);
- +   }
-    while (words >= 0);
-    printf("adios muchacho\n");
 }
 
 
@@ -95,6 +82,7 @@ void translate(int words, char english[], char piglatin[])
             piglatin[count + (n - 1)] = english[count + 1];
         piglatin[m2 + (n - 1)] = english[m1];
         piglatin[m2 + n] = 'a';
+	piglatin[m2 + n +1] = 'y';
 
         m1 = m2 + 2;
     }
