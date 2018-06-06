@@ -2,21 +2,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-
+#include <string.h>
 void init(char english[], char piglatin[]);
 int wordcounter(char english[]);
-void translate(int words, char english[], char piglatin[]);
+void translate(int words, char arg1[], char piglatin[]);
 
 
-int main()
+int main(int argc, char* argv[])
 {
-    char english[80], piglatin[80];
+    char arg1[80], piglatin[80];
     int words;
-	int arg1;
-	init(english, piglatin);
-	english[80] = arg1;
-	words = wordcounter(english);
-	translate(words, english, piglatin);
+	init(arg1, piglatin);
+	sscanf(argv[1], "%s", &arg1);
+	words = wordcounter(arg1);
+	translate(words, arg1, piglatin);
+	printf ("%s\n", piglatin);
 
 }
 
@@ -63,29 +63,23 @@ int wordcounter(char english[])
 
 
 		// begins translation to pig latin
-void translate(int words, char english[], char piglatin[])
+void translate(int words, char arg1[], char piglatin[])
 {
-    int n, count;
+    int count;
     int m1 = 0;
     int m2;
     // m1 starts word, m2 ends
 
     // translate
-    for (n = 1; n <= words; ++n)
-    {
-        count = m1 ;
-        while (english[count] != ' ')
-            m2 = count++;
+            m2 = strlen(arg1);
 
         // transp. first letter & add a
         for (count = m1 ; count < m2; ++count)
-            piglatin[count + (n - 1)] = english[count + 1];
-        piglatin[m2 + (n - 1)] = english[m1];
-        piglatin[m2 + n] = 'a';
-	piglatin[m2 + n +1] = 'y';
+            piglatin[count] = arg1[count + 1];
+        piglatin[m2-1] = arg1[m1];
+        piglatin[m2] = 'a';
+	piglatin[m2 + 1] = 'y';
 
-        m1 = m2 + 2;
-    }
     return;
 }
 
